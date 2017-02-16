@@ -3,9 +3,10 @@ import os
 import tkinter
 from fake_useragent import UserAgent
 
-ua = UserAgent()
+
 
 def get_html(url, e_site):
+    ua = UserAgent()
     headers = {'user-agent': f'{ua.opera}'}
     r = requests.get(url, headers=headers, auth=('doom', '1234565'))
     r.encoding = e_site
