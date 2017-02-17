@@ -13,19 +13,9 @@ def get_pages(html):
 
 def parsing(html, obj):
     soup = BS(html, 'lxml')
-    r = soup.find('td', {'valign':'top', 'style':'width: 100%;'}).find_all('td', class_='header')
-    with open('items.txt', 'a') as f:
-        print('=' * 100, file=f)
-    for i in r:
-        soup = BS(get_html(f"http://soft.sibnet.ru{i.find('a').get('href')}", 'cp1251'), 'lxml')
-        name = soup.find('h1', itemprop='name').text.strip()
-        description = soup.find('h1', itemprop='name').find_next().find_next().text
-        with open('items.txt', 'a') as f:
-
-            print(name, file=f)
-            print('-' * 100, file=f)
-            print(description, file=f)
-            print('=' * 100, file=f, end='\n')
+    r = soup.find_all('table', class_='c_tbl_ap')
+    for a in r:
+        print('http://soft.sibnet.ru' + a.find('a', class_='top_link2')['href'])
 
 
 def main(ob):
